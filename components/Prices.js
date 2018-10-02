@@ -1,33 +1,36 @@
 class Prices extends React.Component {
 
     state = {
-        currency: 'USD'
+        currency: 'USD',
+        entries: []
     }
 
     render () {
         let list = ''
 
         if (this.state.currency === 'USD') {
-            list = <li className="list-group-item">
+            list =
+            <li className="list-group-item">
                 Bitcoin rate for {this.props.bpi.USD.description}
                 : <span className="badge badge-secondary">{this.props.bpi.USD.code}</span>
                 <strong>{this.props.bpi.USD.rate}</strong>
             </li>
         } else if (this.state.currency === 'GBP') {
-            list = <li className="list-group-item">
+            list =
+            <li className="list-group-item">
                 Bitcoin rate for {this.props.bpi.GBP.description}
                 : <span className="badge badge-secondary">{this.props.bpi.GBP.code}</span>
                 <strong>{this.props.bpi.GBP.rate}</strong>
             </li>
 
         } else if (this.state.currency === 'EUR') {
-            list = <li className="list-group-item">
+            list =
+            <li className="list-group-item">
                 Bitcoin rate for {this.props.bpi.EUR.description}
                 : <span className="badge badge-secondary">{this.props.bpi.EUR.code}</span>
                 <strong>{this.props.bpi.EUR.rate}</strong>
             </li>
         }
-
         return (
             <div>
                 <ul className="list-group">
@@ -45,4 +48,4 @@ class Prices extends React.Component {
 }
 
 
-export default Prices
+export default Prices0
