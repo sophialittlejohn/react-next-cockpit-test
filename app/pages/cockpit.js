@@ -17,8 +17,8 @@ const Cockpit = (props) => (
     </Layout>
 )
 
-Cockpit.getInitialProps = async function () {
-    const result = await fetch(`http://localhost:8080/api/collections/get/col1?token=${token}`)
+Cockpit.getInitialProps = async () => {
+    const result = await fetch(`http://172.16.1.74:8080/api/collections/get/col1?token=${token}`)
     const data = await result.json()
     return {
         entries: data.entries

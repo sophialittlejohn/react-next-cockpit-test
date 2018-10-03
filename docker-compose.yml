@@ -1,11 +1,17 @@
 version: '3'
 services:
-  app:
+#  app:
+#    container_name: 'next'
+#    build: .
+#    restart: always
+#    ports:
+#      - "3006:3000"
+#    volumes:
+#      - ./app:/usr/src/app
+  cms:
     image: agentejo/cockpit
-    restart: always
     ports:
-      - "3002:3000"
-      - "3333:22"
-    command: "/usr/sbin/sshd -D"
+      - "8080:80"
+    container_name: 'cms'
     volumes:
-      - ./app:/app
+      - ./cockpit/storage:/var/www/html/storage/

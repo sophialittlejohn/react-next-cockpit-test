@@ -1,32 +1,19 @@
-FROM node:9.2.0
+FROM node:alpine
 
-# SSH Server
-RUN apt-get update && apt-get upgrade -y && apt-get install -qqy \
-    libssl-dev \
-    openssh-server
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-RUN mkdir /var/run/sshd
-RUN echo 'root:screencast' | chpasswd
-RUN sed -i '/PermitRootLogin/c\PermitRootLogin yes' /etc/ssh/sshd_config
+# Install app dependencies
+COPY ./app/package.json /usr/src/app/
+RUN npm install
 
-# SSH login fix. Otherwise user is kicked off after login
-RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-
-ENV NOTVISIBLE "in users profile"
-RUN echo "export VISIBLE=now" >> /etc/profile
-
-RUN mkdir -p /app
-
-WORKDIR /app
-
-COPY ./app/package.json /app
-COPY ./app/package-lock.json /app
-COPY ./app/yarn.lock /app
-
-RUN npm install yarn -g
-RUN yarn install --frozen-lockfile
-RUN npm install -y
-
-COPY ./app /app
-
+# Bundle app source
+COPY ./app /usr/src/app
 RUN npm run build
+
+VOLUME /usr/src/app
+
+EXPOSE 3000
+
+CMD [ "npm", "run", "dev" ]
