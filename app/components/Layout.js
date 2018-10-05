@@ -8,7 +8,7 @@ const Layout = (props) => (
             <title>BlitzPrice</title>
             <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css" />
         </Head>
-        <Navbar/>
+        <Navbar menu={props.menu}/>
         <div className="container">
             {props.children}
         </div>

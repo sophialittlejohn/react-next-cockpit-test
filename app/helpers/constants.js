@@ -1,1 +1,1 @@
-export const token = 'account-0dbe550bd6dd380c7d32f060bfe287'
+export const token = 'account-79c5d2c588460a6aae463e8b0ae281'
